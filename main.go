@@ -13,17 +13,16 @@ var logger = log.New(os.Stdout, "web-server ", log.LstdFlags|log.Lshortfile|log.
 var port = getEnv("SERVER_PORT", "8080")
 
 func main() {
-	http.HandleFunc("/", readme)
-	http.HandleFunc("/geo", getResponse)
+	http.HandleFunc("/", locate)
 	logger.Println("Server is ready to handle requests at port", port)
 	logger.Fatal(http.ListenAndServe(":"+port, nil))
 }
 
-func readme(w http.ResponseWriter, r *http.Request) {
-	http.ServeFile(w, r, "index.html")
-}
+func locate(w http.ResponseWriter, r *http.Request) {
 
-func getResponse(w http.ResponseWriter, r *http.Request) {
+	if r.Method == "GET" {
+		http.ServeFile(w, r, "index.html")
+	}
 
 	var request []string
 
