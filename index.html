@@ -4,10 +4,8 @@
     <p>Get your location</p>
     <button onclick="getLocation()">CLICK HERE</button>
     <p id="location"></p>
-
     <script>
       var x = document.getElementById("location");
-      
       function getLocation() {
         if (navigator.geolocation) {
           navigator.geolocation.getCurrentPosition(showPosition, errorCallback, { timeout:5000 });
@@ -15,22 +13,18 @@
           x.innerHTML = "Geolocation not supported by this browser.";
         }
       }
-
       function showPosition(position) {
         var latlong = x.innerHTML = "Latitude: " + position.coords.latitude + "<br>Longitude: " + position.coords.longitude;
         var xhr = new XMLHttpRequest();
         xhr.open("POST", '/geo', true);
-        // xhr.setRequestHeader('Content-Type', 'text/html');
         xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.send(JSON.stringify({
           location: latlong
         }));
       }
-
       function errorCallback(error) {
         x.innerHTML = "failed";
       }
     </script>
-
   </body>
 </html>
