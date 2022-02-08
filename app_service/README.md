@@ -1,5 +1,7 @@
 ## Azure App Service
 
+Location **doesn't** work, it works only on your workstation.
+
 ```
 az login
 

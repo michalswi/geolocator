@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <body>
-    <p>Get your location</p>
+    <p>Get your location:</p>
     <button onclick="getLocation()">CLICK HERE</button>
     <p id="location"></p>
     <script>
@@ -24,6 +24,20 @@
       }
       function errorCallback(error) {
         x.innerHTML = "failed";
+      }
+    </script>
+    <form id="searchForm" methods="get" action="#" onsubmit="setFormUrl()" target="_blank">
+      Google Maps: <input type="text" name="q" />
+      <input type="submit" value="Go" />
+    </form>
+    <script>
+      function webpage() {
+        // return "https://www.openstreetmap.org/";
+        return "https://www.google.com/maps/";
+      }
+      function setFormUrl() {
+        var url = webpage();
+        document.getElementById('searchForm').setAttribute('action', url);
       }
     </script>
   </body>
