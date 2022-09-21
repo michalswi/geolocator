@@ -27,8 +27,11 @@ def validate(data):
 def geoLocation(geoloc):
     driver = webdriver.Firefox()
     driver.get(URL)
+    # accept google agreement
+    elem = driver.find_element("xpath","//button[contains(@class, 'VfPpkd-LgbsSe')]")
+    elem.send_keys(Keys.RETURN)
     # wait until page (URL) is loaded
-    # time.sleep(5)
+    time.sleep(5)
     elem = driver.find_element("id","searchboxinput")
     elem.send_keys(geoloc)
     elem.send_keys(Keys.RETURN)
