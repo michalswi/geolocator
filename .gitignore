@@ -2,3 +2,4 @@
 __*
 geolocator
 geckodriver.log
+.gcloudignore
