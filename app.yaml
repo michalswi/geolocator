@@ -1,2 +1,2 @@
-# go119 not supported [14/11/22]
-runtime: go116
+runtime: go119
+service: geo-svc
