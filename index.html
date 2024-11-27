@@ -8,6 +8,7 @@
       var x = document.getElementById("location");
       function getLocation() {
         if (navigator.geolocation) {
+          // https://developer.mozilla.org/en-US/docs/Web/API/Geolocation/getCurrentPosition
           navigator.geolocation.getCurrentPosition(showPosition, errorCallback, { timeout:5000 });
         } else {
           x.innerHTML = "Geolocation not supported by this browser.";

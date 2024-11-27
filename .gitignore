@@ -3,3 +3,4 @@ __*
 geolocator
 geckodriver.log
 .gcloudignore
+selenium/geoloc/*

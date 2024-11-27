@@ -2,15 +2,20 @@ import time
 import sys
 
 from selenium import webdriver
+
+from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
-
-URL="https://www.google.com/maps"
+# use english by default
+URL="https://www.google.com/maps?hl=en-US"
 TIMEBREAK=15
 
 def timer(timebreak):
     while timebreak > 0:
-        print("%d" %timebreak, end="\r")
+        print(f"{timebreak:2d}", end="\r", flush=True)
         timebreak -= 1
         time.sleep(1)
     print("BUUM!")
@@ -25,11 +30,24 @@ def validate(data):
         return ",".join([data[1],data[2]])
 
 def geoLocation(geoloc):
+    # [optional] 'en-US' in URL is enough
+    # options = Options()
+    # options.set_preference("intl.accept_languages", "en-US, en")  # Preferred languages
+    # options.set_preference("intl.locale.requested", "en-US")  # Locale override
+    # options.set_preference("general.useragent.locale", "en-US")  # User agent locale
+    # driver = webdriver.Firefox(options=options)
+
     driver = webdriver.Firefox()
     driver.get(URL)
-    # accept google agreement
-    elem = driver.find_element("xpath","//button[contains(@class, 'VfPpkd-LgbsSe')]")
-    elem.send_keys(Keys.RETURN)
+    
+    # ACCEPT GOOGLE AGREEMENT
+    # elem = driver.find_element("xpath","//button[contains(@class, 'VfPpkd-RLmnJb')]")
+    # elem.send_keys(Keys.RETURN)
+    elem = WebDriverWait(driver, 10).until(
+        EC.element_to_be_clickable((By.XPATH, "//span[@class='VfPpkd-vQzf8d' and text()='Reject all']"))
+    )
+    elem.click()
+
     # wait until page (URL) is loaded
     time.sleep(5)
     elem = driver.find_element("id","searchboxinput")
